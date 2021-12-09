@@ -1,0 +1,160 @@
+body {
+  background-color: #ebebeb;
+}
+
+:root {
+  --primary-color: #42b983;
+}
+
+.card-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  padding-left: 5%;
+  padding-right: 5%;
+}
+
+.card {
+  height: 275px;
+  width: 250px;
+  position: relative;
+  font-family: Roboto, sans-serif;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+  border-radius: 8px;
+  background-color: white;
+  box-shadow: rgba(0, 0, 0, 0.5) 4px 4px 16px;
+  overflow: hidden;
+  margin: 16px 16px;
+  padding: 16px;
+  cursor: pointer;
+}
+
+.card-content {
+  padding: 100%;
+}
+
+.empty-store {
+  text-align: center;
+  font-size: 40px;
+  color: #999999;
+  margin: 20%;
+}
+
+.primary-button {
+  background-color: var(--primary-color);
+  border: none;
+  color: white;
+  padding: 12px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  border-radius: 8px;
+  cursor: pointer;
+  text-align: center;
+}
+
+.add-button {
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+  background-color: var(--primary-color);
+  border: 1px solid var(--primary-color);
+  color: white;
+  padding: 12px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 0px 2px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+  cursor: pointer;
+  text-align: center;
+}
+
+.right {
+  float: right;
+}
+
+img {
+  border-radius: 10px;
+  height: 175px;
+  width: 175px;
+}
+
+.fender:hover {
+  background-color: red;
+  color: white;
+}
+
+.Yamaha:hover {
+  background-color: green;
+  color: white;
+}
+
+.Maton:hover {
+  background-color: blue;
+  color: white;
+}
+
+/* Modal */
+
+Input {
+  margin: 15px 10px;
+  padding: 10px 100px 10px 5px;
+  border-radius: 5px;
+  border: 1px solid black;
+}
+
+.modal-mask {
+  position: fixed;
+  z-index: 9998;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.3);
+  display: table;
+  transition: opacity 0.3s ease;
+}
+
+.modal-wrapper {
+  text-align: center;
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.modal-close {
+  float: right;
+  cursor: pointer;
+}
+
+.modal-container {
+  width: 300px;
+  margin: 0px auto;
+  padding: 20px 30px;
+  background-color: #fff;
+  border-radius: 2px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.33);
+  transition: all 0.3s ease;
+  font-family: Helvetica, Arial, sans-serif;
+}
+
+.modal-header h3 {
+  margin-top: 0;
+  color: var(--primary-color);
+}
+
+.modal-body {
+  margin: 20px 0;
+}
+
+.modal-footer {
+  text-align: center;
+}

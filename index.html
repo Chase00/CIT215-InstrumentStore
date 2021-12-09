@@ -1,0 +1,141 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Instrument Store</title>
+  <script src="https://unpkg.com/vue"></script>
+  <link rel="stylesheet" href="style.css">
+
+
+
+  <!--------------- MODAL TEMPLATE --------------->
+  <script type="text/x-template" id="modal-template">
+        <transition name="instrumentModal">
+          <div class="modal-mask">
+            <div class="modal-wrapper">
+              <div class="modal-container">
+                <div class="modal-close" @click="$emit('close')">
+                  X
+                </div>
+                <br />
+                <div class="modal-header">
+                  <slot name="header"></slot>
+                </div>
+  
+                <div class="modal-body">
+                  <slot name="body"></slot>
+                </div>
+  
+                <div>
+                  <slot name="footer-message"></slot>
+                  <slot name="footer" class="modal-footer">
+                    <button class="primary-button" @click="$emit('close')"></button>
+                  </slot>
+                </div>
+              </div>
+            </div>
+          </div>
+        </transition>
+      </script>
+
+</head>
+
+
+
+<body>
+  <div id="app">
+
+    <!--------------- ADD INSTRUMENT MODAL --------------->
+    <modal v-if="showInstrumentModal" @close="showInstrumentModal = false">
+      <h3 slot="header">Add a new instrument</h3>
+
+      <div slot="body">
+        <input type="text" placeholder="Instrument Name" v-model="input.name">
+
+        <input type="text" placeholder="Instrument Type" v-model="input.type">
+
+        <label>Select a brand:</label>
+        <br />
+        <select v-model="input.brand">
+          <option v-for="option in brands" v-bind:value="option.brandName">
+            {{ option.brandName }}
+          </option>
+        </select>
+
+        <br />
+
+        <input type="text" placeholder="Instrument Price" v-model="input.price">
+
+        <input type="text" placeholder="Enter an image URL" v-model="input.imageUrl">
+      </div>
+      <div slot="footer-message">
+        {{warning}}
+      </div>
+
+      <div slot="footer" class="modal-footer">
+        <button class="primary-button" @click="addInstrumentCard">
+          Add instrument
+        </button>
+      </div>
+    </modal>
+
+    <!--------------- HEADER BUTTONS --------------->
+    <header>
+      <button id="show-modal" class="primary-button" @click="showInstrumentModal = true">
+        Add New Instrument
+      </button>
+
+      <button class="primary-button right" @click="resetStore()">
+        Cart: {{myCartAmount}}
+      </button>
+    </header>
+
+    <p class="empty-store" v-if="noInstruments">The instrument store is empty :(</p>
+
+    <!--------------- CARD CONTAINER --------------->
+    <div class="card-wrapper">
+
+      <div v-for="(item, index) in instruments">
+
+        <!--------------- VIEW INSTRUMENT MODAL --------------->
+        <modal v-if="showInfoModal" @close="showInfoModal = false">
+
+          <div slot="body">
+            <img :src="indexItem.imageUrl ? indexItem.imageUrl : 'noimage.png'" alt="" />
+            <p>Name: {{indexItem.name}}</p>
+            <p>Type: {{indexItem.type}}</p>
+            <p>Brand: {{indexItem.brand}}</p>
+            <p>Price: ${{indexItem.price}}</p>
+          </div>
+
+          <div slot="footer" class="modal-footer">
+            <button class="primary-button" @click="addToCart(indexNum); showInfoModal = false;">
+              Add to Cart
+            </button>
+          </div>
+        </modal>
+
+        <!--------------- INSTRUMENT CARD --------------->
+        <div>
+          <div class="card" :class="[item.brand]">
+            <div class="card-content" @click="showInfoModal = true; grabItem(index)">
+              <img :src="item.imageUrl ? item.imageUrl : 'noimage.png'" alt="" />
+              <p>{{item.name}}</p>
+
+            </div>
+            <button class="add-button" @click="addToCart(index)">
+              Add to Cart
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+  <script src="app.js"></script>
+</body>
+
+</html>
